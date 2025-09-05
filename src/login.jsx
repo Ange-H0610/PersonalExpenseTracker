@@ -6,9 +6,8 @@ function LoginForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  // Fonction login
   const handleLogin = async (e) => {
-    e.preventDefault(); // éviter le refresh
+    e.preventDefault();
 
     try {
       const res = await fetch("http://localhost:5000/api/login", {
@@ -21,9 +20,9 @@ function LoginForm() {
 
       if (data.token) {
         localStorage.setItem("token", data.token);
-        alert("✅ Connexion réussie !");
+        alert("Connexion réussie !");
       } else {
-        alert("❌ " + data.error);
+        alert(data.error);
       }
     } catch (err) {
       console.error(err);
