@@ -20,7 +20,7 @@ export default function Homepage() {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-r from-black via-purple-900 to-purple-700 text-white p-6 overflow-x-hidden">
+    <div className="min-h-screen text-white p-6 overflow-x-hidden bg-animated-gradient">
 
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-4xl font-bold">Personal Expense Tracker</h1>

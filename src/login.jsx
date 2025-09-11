@@ -11,17 +11,17 @@ function LoginForm() {
   const handleLogin = (e) => {
     e.preventDefault();
 
-    // Vérification simple : si email et password sont remplis
+
     if (email && password) {
-      localStorage.setItem("token", "dummy-token"); // facultatif
-      navigate("/homepage"); // ← redirection vers Homepage
+      localStorage.setItem("token", "dummy-token");
+      navigate("/homepage");
     } else {
       alert("Veuillez entrer vos identifiants !");
     }
   };
 
   return (
-    <div className="min-h-screen flex items-center w-full justify-center bg-gradient-to-r from-[#341c51] to-gray-800 via-[#471235]">
+    <div className="min-h-screen flex items-center w-full justify-center bg-gradient-to-r from-[#341c51] to-gray-800 via-[#471235]min-h-screen text-white p-6 overflow-x-hidden bg-animated-gradient">
       <article className="absolute ml-[-600px] text-3xl mb-5 font-bold text-balance">
         <h1 className="mb-1.5 text-[#113257]">MONEFY</h1>
         <h2 className="text-balance text-[#ACACAC]">Never lose track of your expenses !</h2>
