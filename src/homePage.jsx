@@ -1,8 +1,13 @@
-import { useState } from "react";
 import { FaTrash, FaEdit, FaPlus, FaFileUpload } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
 export default function Homepage() {
-  const [dummy, setDummy] = useState(false);
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    navigate("/");
+  };
 
   const categories = ["Food", "Transport", "Entertainment"];
   const dummyExpenses = [
@@ -16,13 +21,23 @@ export default function Homepage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-r from-black via-purple-900 to-purple-700 text-white p-6 overflow-x-hidden">
+
+      <div className="flex justify-between items-center mb-6">
+        <h1 className="text-4xl font-bold">Personal Expense Tracker</h1>
+        <button
+          onClick={handleLogout}
+          className="bg-red-600 px-4 py-2 rounded hover:bg-red-500 transition"
+        >
+          Logout
+        </button>
+      </div>
+
       <div className="relative w-full h-64 mb-6">
         <img
           src="https://cdn.pixabay.com/photo/2023/04/16/18/50/money-7921013_1280.png"
           alt="3D money"
           className="absolute w-64 h-64 top-0 right-0 animate-bounce"
         />
-        <h1 className="text-4xl font-bold pt-10">Personal Expense Tracker</h1>
         <p className="text-purple-200 mt-2">
           Track your expenses, incomes, recurring payments and budget alerts.
         </p>
