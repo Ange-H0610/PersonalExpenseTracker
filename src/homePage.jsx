@@ -33,11 +33,6 @@ export default function Homepage() {
       </div>
 
       <div className="relative w-full h-64 mb-6">
-        <img
-          src="https://cdn.pixabay.com/photo/2023/04/16/18/50/money-7921013_1280.png"
-          alt="3D money"
-          className="absolute w-64 h-64 top-0 right-0 animate-bounce"
-        />
         <p className="text-purple-200 mt-2">
           Track your expenses, incomes, recurring payments and budget alerts.
         </p>
