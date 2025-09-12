@@ -73,7 +73,7 @@ export default function Homepage() {
         </div>
 
         <div className="bg-[#113257] rounded p-4 shadow-lg">
-          <h2 className="text-2xl font-bold mb-2">Incomes</h2>
+          <h2 className="text-2xl font-bold mb-2">Incomes. </h2>
           <div className="flex gap-2 mb-2">
             <input type="number" placeholder="Amount" className="p-2 rounded text-white w-20" />
             <input type="text" placeholder="Source" className="p-2 rounded text-white flex-1" />
