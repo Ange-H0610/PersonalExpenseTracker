@@ -44,21 +44,21 @@ export default function Homepage() {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div className="bg-purple-800 rounded p-4 shadow-lg">
+        <div className="bg-[#113257] rounded p-4 shadow-lg">
           <h2 className="text-2xl font-bold mb-2">Expenses</h2>
           <div className="flex gap-2 mb-2">
-            <input type="number" placeholder="Amount" className="p-2 rounded text-black w-20" />
-            <select className="p-2 rounded text-black">
+            <input type="number" placeholder="Amount" className="p-2 rounded text-white w-20" />
+            <select className="p-2 rounded text-white">
               <option>Category</option>
               {categories.map(c => <option key={c}>{c}</option>)}
             </select>
-            <input type="text" placeholder="Description" className="p-2 rounded text-black flex-1" />
+            <input type="text" placeholder="Description" className="p-2 rounded text-white flex-1" />
             <button className="bg-green-500 px-3 rounded hover:bg-green-400"><FaPlus /></button>
           </div>
 
           <ul className="space-y-1 max-h-64 overflow-y-auto">
             {dummyExpenses.map(exp => (
-              <li key={exp.id} className="flex justify-between bg-purple-700 p-2 rounded">
+              <li key={exp.id} className="flex justify-between bg-gray-500 p-2 rounded">
                 <div>
                   <span className="font-bold">${exp.amount}</span> - {exp.category} - {exp.description}
                 </div>
