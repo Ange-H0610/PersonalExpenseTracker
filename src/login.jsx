@@ -3,26 +3,36 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
 import "./App.css";
 
 function LoginForm() {
+  const [isLogin, setIsLogin] = useState(true);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [name, setName] = useState("");
 
-  const handleLogin = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      const res = await fetch("http://localhost:5000/api/login", {
+      const url = isLogin
+        ? "http://localhost:5000/api/login"
+        : "http://localhost:5000/api/signup";
+
+      const body = isLogin
+        ? { email, password }
+        : { name, email, password };
+
+      const res = await fetch(url, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify(body),
       });
 
       const data = await res.json();
 
       if (data.token) {
         localStorage.setItem("token", data.token);
-        alert("Connexion réussie !");
+        alert(isLogin ? "Connexion réussie !" : "Inscription réussie !");
       } else {
-        alert(data.error);
+        alert(data.error || "Erreur !");
       }
     } catch (err) {
       console.error(err);
@@ -34,12 +44,12 @@ function LoginForm() {
     <>
       <div
         className="min-h-screen flex items-center w-full 
-      justify-center bg-gradient-to-r from-[#341c51]
-       to-gray-800 via-[#471235]"
+        justify-center bg-gradient-to-r from-[#341c51]
+        to-gray-800 via-[#471235]"
       >
         <article
           className="absolute ml-[-600px] 
-        text-3xl mb-5 font-bold text-balance "
+          text-3xl mb-5 font-bold text-balance "
         >
           <h1 className="mb-1.5 text-[#113257]">MONEFY</h1>
           <h2 className="text-balance text-[#ACACAC]">
@@ -48,14 +58,33 @@ function LoginForm() {
         </article>
 
         <div className="pt-[10px] mt-[30px] ml-[500px]
-         bg-[#113257] w-[250px] h-[440px] rounded-[7px] text-white font-bold">
-          REGISTRATION
+          bg-[#113257] w-[250px] h-[460px] rounded-[7px] text-white font-bold">
+          
+          {isLogin ? "LOGIN" : "SIGN UP"}
+          
           <p className="pt-[35px] text-balance font-light ">
             Chose to track and how you want to balance your expenses .
           </p>
-          <p className="font-light">It starts by login </p>
-          <div className="bg-[#E9ECEE] mt-[20px] w-[250px] h-[315px] rounded-2xl">
-            <form className="space-y-4" onSubmit={handleLogin}>
+          <p className="font-light">
+            {isLogin ? "It starts by login" : "Create an account to start"}
+          </p>
+
+          <div className="bg-[#E9ECEE] mt-[20px] w-[250px] h-[340px] rounded-2xl">
+            <form className="space-y-4 p-3" onSubmit={handleSubmit}>
+              
+              {!isLogin && (
+                <div>
+                  <input
+                    type="text"
+                    placeholder="Enter your name"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    className="w-[200px] mt-2.5 text-black p-2 border rounded-lg
+                    focus:outline-none focus:ring-2 focus:ring-blue-400"
+                  />
+                </div>
+              )}
+
               <div>
                 <input
                   type="email"
@@ -63,7 +92,7 @@ function LoginForm() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   className="w-[200px] mt-2.5 text-black p-2 border rounded-lg
-                   focus:outline-none focus:ring-2 focus:ring-blue-400"
+                  focus:outline-none focus:ring-2 focus:ring-blue-400"
                 />
               </div>
 
@@ -74,31 +103,40 @@ function LoginForm() {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   className="w-[200px] mt-2.5 p-2 text-black border
-                   rounded-lg focus:outline-none focus:ring-2
-                    focus:ring-blue-400"
+                  rounded-lg focus:outline-none focus:ring-2
+                  focus:ring-blue-400"
                 />
               </div>
 
               <button
                 type="submit"
                 className="w-[150px] bg-[#1a384d]
-                 text-white py-3 rounded-lg 
-                 hover:bg-[#6E9FC1] transition"
+                text-white py-3 rounded-lg 
+                hover:bg-[#6E9FC1] transition"
               >
-                LOG IN
+                {isLogin ? "LOG IN" : "SIGN UP"}
               </button>
-              <p className=" text-black
-               hover:text-gray-600 ">
-                {" "}
-                Forgot password ?
-              </p>
-              
-              <p className=" m
-               text-black text-sm font-light ">Don't have an account yet? 
-                
+
+              {isLogin && (
+                <p className="text-black hover:text-gray-600">
+                  Forgot password ?
                 </p>
-                <button className=" mb-[15px] mt-[-25px] 
-                text-[#113257] hover:text-black " >Sign in </button>
+              )}
+
+              <p className="text-black text-sm font-light">
+                {isLogin
+                  ? "Don't have an account yet?"
+                  : "Already have an account?"}
+              </p>
+
+              <button
+                type="button"
+                onClick={() => setIsLogin(!isLogin)}
+                className="mb-[15px] mt-[-25px] 
+                text-[#113257] hover:text-black"
+              >
+                {isLogin ? "Sign up" : "Log in"}
+              </button>
             </form>
           </div>
         </div>
@@ -106,4 +144,5 @@ function LoginForm() {
     </>
   );
 }
+
 export default LoginForm;
