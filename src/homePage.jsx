@@ -72,16 +72,16 @@ export default function Homepage() {
           </ul>
         </div>
 
-        <div className="bg-purple-800 rounded p-4 shadow-lg">
+        <div className="bg-[#113257] rounded p-4 shadow-lg">
           <h2 className="text-2xl font-bold mb-2">Incomes</h2>
           <div className="flex gap-2 mb-2">
-            <input type="number" placeholder="Amount" className="p-2 rounded text-black w-20" />
-            <input type="text" placeholder="Source" className="p-2 rounded text-black flex-1" />
+            <input type="number" placeholder="Amount" className="p-2 rounded text-white w-20" />
+            <input type="text" placeholder="Source" className="p-2 rounded text-white flex-1" />
             <button className="bg-green-500 px-3 rounded hover:bg-green-400"><FaPlus /></button>
           </div>
           <ul className="space-y-1 max-h-64 overflow-y-auto">
             {dummyIncomes.map(inc => (
-              <li key={inc.id} className="flex justify-between bg-purple-700 p-2 rounded">
+              <li key={inc.id} className="flex justify-between bg-gray-500 p-2 rounded">
                 <div>
                   <span className="font-bold">${inc.amount}</span> - {inc.source}
                 </div>
