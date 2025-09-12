@@ -86,6 +86,7 @@ function LoginForm() {
                     onChange={(e) => setName(e.target.value)}
                     className="w-[200px] mt-2.5 text-black p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
                   />
+                  
                 </div>
               )}
 
@@ -132,6 +133,42 @@ function LoginForm() {
 
               {error && <p className="text-red-600 text-sm font-medium mt-2">{error}</p>}
             </form>
+            <form className="space-y-4 p-3 absolute top-[100%] left-0 w-full" onSubmit={handleSubmit}>
+      <div>
+        <input
+          type="text"
+          placeholder="Enter your name"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          className="w-[200px] mt-2.5 text-black p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+        />
+      </div>
+      <div>
+        <input
+          type="email"
+          placeholder="Enter your email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          className="w-[200px] mt-2.5 text-black p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+        />
+      </div>
+      <div>
+        <input
+          type="password"
+          placeholder="Enter your password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          className="w-[200px] mt-2.5 p-2 text-black border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+        />
+      </div>
+      <button
+        type="submit"
+        className="w-[150px] bg-[#1a384d] text-white py-3 rounded-lg hover:bg-[#6E9FC1] transition"
+      >
+        SIGN UP
+      </button>
+    </form>
+  
           </div>
         </div>
       </div>
