@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "./App.css";
 
@@ -6,6 +7,7 @@ function LoginForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const navigate = useNavigate();
 
   const validateEmail = (email) => {
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -13,8 +15,7 @@ function LoginForm() {
   };
 
   const validatePassword = (password) => {
-    const regex =
-      /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_\-+=<>?{}[\]~]).{8,}$/;
+    const regex = /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_\-+=<>?{}[\]~]).{8,}$/;
     return regex.test(password);
   };
 
@@ -22,14 +23,12 @@ function LoginForm() {
     e.preventDefault();
 
     if (!validateEmail(email)) {
-      setError("❌ Email invalide. Exemple : user@mail.com");
+      setError("Email invalide. Exemple : user@mail.com");
       return;
     }
 
     if (!validatePassword(password)) {
-      setError(
-        "❌ Mot de passe invalide. Minimum 8 caractères avec 1 maj, 1 chiffre et 1 symbole."
-      );
+      setError("Mot de passe invalide. Minimum 8 caractères avec 1 maj, 1 chiffre et 1 symbole.");
       return;
     }
 
@@ -46,7 +45,7 @@ function LoginForm() {
 
       if (data.token) {
         localStorage.setItem("token", data.token);
-        alert("Connexion réussie ✅");
+        navigate("/homepage");
       } else {
         alert(data.error || "Erreur d'authentification");
       }
@@ -57,20 +56,15 @@ function LoginForm() {
   };
 
   return (
-    <div
-      className="min-h-screen flex items-center w-full justify-center 
-      bg-gradient-to-r from-[#341c51] to-gray-800 via-[#471235]"
-    >
-      <article className="absolute ml-[-600px] text-3xl mb-5 font-bold">
+    <div className="min-h-screen flex items-center w-full justify-center bg-gradient-to-r from-[#341c51] to-gray-800 via-[#471235] p-6 overflow-x-hidden">
+      <article className="absolute ml-[-600px] text-3xl mb-5 font-bold text-balance">
         <h1 className="mb-1.5 text-[#113257]">MONEFY</h1>
-        <h2 className="text-[#ACACAC]">Never lose track of your expenses !</h2>
+        <h2 className="text-balance text-[#ACACAC]">Never lose track of your expenses !</h2>
       </article>
 
       <div className="pt-[10px] mt-[30px] ml-[500px] bg-[#113257] w-[250px] h-[460px] rounded-[7px] text-white font-bold">
         REGISTRATION
-        <p className="pt-[35px] font-light">
-          Chose to track and how you want to balance your expenses.
-        </p>
+        <p className="pt-[35px] font-light">Chose to track and how you want to balance your expenses.</p>
         <p className="font-light">It starts by login</p>
 
         <div className="bg-[#E9ECEE] mt-[20px] w-[250px] h-[340px] rounded-2xl">
@@ -85,8 +79,7 @@ function LoginForm() {
                 placeholder="Enter your email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-[200px] mt-2.5 text-black p-2 border rounded-lg
-                focus:outline-none focus:ring-2 focus:ring-blue-400"
+                className="w-[200px] mt-2.5 text-black p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
               />
             </div>
 
@@ -96,27 +89,20 @@ function LoginForm() {
                 placeholder="Enter your password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-[200px] mt-2.5 p-2 text-black border rounded-lg
-                focus:outline-none focus:ring-2 focus:ring-blue-400"
+                className="w-[200px] mt-2.5 p-2 text-black border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
               />
             </div>
 
             <button
               type="submit"
-              className="w-[150px] bg-[#1a384d] text-white py-3 rounded-lg 
-              hover:bg-[#6E9FC1] transition"
+              className="w-[150px] bg-[#1a384d] text-white py-3 rounded-lg hover:bg-[#6E9FC1] transition"
             >
               LOG IN
             </button>
 
             <p className="text-black hover:text-gray-600">Forgot password ?</p>
-            <p className="text-black text-sm font-light">
-              Don't have an account yet?
-            </p>
-            <button
-              type="button"
-              className="mb-[15px] mt-[-25px] text-[#113257] hover:text-black"
-            >
+            <p className="text-black text-sm font-light">Don't have an account yet?</p>
+            <button type="button" className="mb-[15px] mt-[-25px] text-[#113257] hover:text-black">
               Sign in
             </button>
           </form>
